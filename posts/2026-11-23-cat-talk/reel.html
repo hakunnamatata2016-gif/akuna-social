@@ -40,18 +40,46 @@
 @keyframes rub{from{transform:translateX(0)}to{transform:translateX(-70px)}}
 .heart{transform-box:fill-box;transform-origin:50% 100%;animation:float 1.4s ease-out var(--d,0s) both}
 @keyframes float{0%{opacity:0;transform:translateY(30px) scale(.5)}30%{opacity:1}100%{opacity:0;transform:translateY(-160px) scale(1.1)}}
+
+/* ---- life layer: continuous, calm motion so no frame is ever static ---- */
+.super{animation:drift 3.4s linear var(--at,0s) both}
+@keyframes drift{from{translate:0 0;scale:1}to{translate:-70px 50px;scale:1.06}}
+.bob{animation:bob 1.3s ease-in-out var(--d,0s) 9 alternate both}
+@keyframes bob{from{translate:0 0}to{translate:0 -16px}}
+/* stories-style progress bar: tells the viewer there are 3 tips, keeps them watching */
+.prog{position:absolute;top:96px;left:110px;right:110px;display:flex;gap:12px;z-index:20}
+.prog i{flex:1;height:9px;border-radius:9px;background:rgba(255,255,255,.35);overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.15)}
+.prog i b{display:block;height:100%;background:#fff;transform-origin:100% 50%;transform:scaleX(0);animation:fill var(--len) linear var(--at) forwards}
+@keyframes fill{to{transform:scaleX(1)}}
+/* the key word gets a hand-drawn swoosh that draws itself in */
+.swoosh::after{z-index:-1}
+.draw::after{animation:draw .5s ease-out var(--d,0s) both}
+@keyframes draw{from{clip-path:inset(0 0 0 100%)}to{clip-path:inset(0 0 0 0)}}
+/* numbers slam in */
+.slam{animation:slam .45s cubic-bezier(.3,1.7,.5,1) var(--d,0s) both}
+@keyframes slam{from{transform:scale(2.2) rotate(-14deg);opacity:0}to{transform:rotate(-4deg);opacity:1}}
+/* floating paw prints */
+.paw{position:absolute;width:64px;height:64px;opacity:0;animation:pawup 2.6s ease-out var(--d) both}
+@keyframes pawup{0%{opacity:0;translate:0 60px;rotate:-10deg}20%{opacity:.9}100%{opacity:0;translate:0 -260px;rotate:12deg}}
+/* CTA pill */
+.cta{display:inline-flex;align-items:center;gap:18px;background:var(--leaf);color:#fff;font:700 60px/1 var(--display);
+  padding:30px 54px;border-radius:999px;box-shadow:0 18px 36px -14px rgba(7,139,69,.6)}
+.cta svg{width:58px;height:58px}
+.pulse{animation:pop .5s cubic-bezier(.3,1.6,.5,1) var(--d) both,pulse .9s ease-in-out calc(var(--d) + .6s) 3 alternate}
+@keyframes pulse{to{scale:1.06}}
 </style></head>
 <body><div class="canvas grain">
+<div class="prog" style="z-index:30"><i><b style="--at:0s;--len:2.8s"></b></i><i><b style="--at:2.8s;--len:2.8s"></b></i><i><b style="--at:5.6s;--len:2.8s"></b></i><i><b style="--at:8.4s;--len:2.8s"></b></i></div>
 
 <!-- BEAT 1 — hook, readable at frame 0 -->
 <section class="beat b1">
   <div class="super" style="--c:rgba(255,255,255,.06);width:1500px;left:-620px;top:-200px;transform:rotate(10deg)"></div>
   <div class="safe-916">
     <div class="big" data-text>החתול שלך</div>
-    <div class="big" data-text>מדבר איתך.</div>
+    <div class="big" data-text>מדבר <span class="swoosh draw" style="--d:.35s">איתך.</span></div>
     <div class="hand rise" data-text style="--d:.9s;color:var(--sun);margin-top:26px">רק לא במילים.</div>
   </div>
-  <svg class="art pop" data-art style="--d:.25s" viewBox="0 0 820 620" aria-hidden="true">
+  <svg class="art pop bob" data-art style="--d:.25s" viewBox="0 0 820 620" aria-hidden="true">
     <ellipse cx="410" cy="600" rx="250" ry="18" fill="rgba(0,0,0,.25)"/>
     <path d="M190 210 L215 40 L330 140 Z" fill="#E8641E"/><path d="M630 210 L605 40 L490 140 Z" fill="#E8641E"/>
     <path d="M220 175 L232 85 L295 140 Z" fill="#F4A9A0"/><path d="M600 175 L588 85 L525 140 Z" fill="#F4A9A0"/>
@@ -67,17 +95,17 @@
     <g stroke="#FFF4EA" stroke-width="6" stroke-linecap="round" opacity=".9">
       <path d="M300 440 L150 420 M300 465 L150 480"/><path d="M520 440 L670 420 M520 465 L670 480"/></g>
   </svg>
+<svg data-art class="paw" style="--d:.6s;left:120px;top:1300px" viewBox="0 0 40 40"><g fill="#FFC83D"><ellipse cx="20" cy="26" rx="9" ry="7.5"/><circle cx="10" cy="15" r="4.2"/><circle cx="17" cy="10" r="4.2"/><circle cx="25" cy="10.5" r="4.2"/><circle cx="31" cy="16" r="4"/></g></svg><svg data-art class="paw" style="--d:.9s;left:860px;top:1250px" viewBox="0 0 40 40"><g fill="#FFF4EA"><ellipse cx="20" cy="26" rx="9" ry="7.5"/><circle cx="10" cy="15" r="4.2"/><circle cx="17" cy="10" r="4.2"/><circle cx="25" cy="10.5" r="4.2"/><circle cx="31" cy="16" r="4"/></g></svg><svg data-art class="paw" style="--d:1.3s;left:200px;top:1500px" viewBox="0 0 40 40"><g fill="#FFF4EA"><ellipse cx="20" cy="26" rx="9" ry="7.5"/><circle cx="10" cy="15" r="4.2"/><circle cx="17" cy="10" r="4.2"/><circle cx="25" cy="10.5" r="4.2"/><circle cx="31" cy="16" r="4"/></g></svg><svg data-art class="paw" style="--d:1.7s;left:800px;top:1520px" viewBox="0 0 40 40"><g fill="#FFC83D"><ellipse cx="20" cy="26" rx="9" ry="7.5"/><circle cx="10" cy="15" r="4.2"/><circle cx="17" cy="10" r="4.2"/><circle cx="25" cy="10.5" r="4.2"/><circle cx="31" cy="16" r="4"/></g></svg>
 </section>
-
 <!-- BEAT 2 — tail up -->
 <section class="beat b2">
-  <div class="super" style="--c:rgba(255,255,255,.09);width:1500px;right:-700px;top:-260px;transform:rotate(-12deg)"></div>
+  <div class="super" style="--at:2.8s;--c:rgba(255,255,255,.09);width:1500px;right:-700px;top:-260px;transform:rotate(-12deg)"></div>
   <div class="safe-916">
-    <div class="row"><span class="idx num pop" data-text style="--d:3.1s;color:var(--forest)">1</span>
-      <span class="mid rise" data-text style="--d:3.25s;color:var(--ink)">זנב זקוף</span></div>
+    <div class="row"><span class="idx num slam" data-text style="--d:3.1s;color:var(--forest)">1</span>
+      <span class="mid rise" data-text style="--d:3.25s;color:var(--ink)">זנב <span class="swoosh draw" style="--d:3.7s">זקוף</span></span></div>
     <div class="small rise" data-text style="--d:3.6s;color:var(--ink);margin-top:20px">אומר: ״איזה כיף שחזרת.״</div>
   </div>
-  <svg class="art" data-art viewBox="0 0 820 620" aria-hidden="true">
+  <svg class="art bob" data-art viewBox="0 0 820 620" aria-hidden="true">
     <ellipse cx="410" cy="600" rx="230" ry="18" fill="rgba(0,0,0,.2)"/>
     <ellipse cx="410" cy="470" rx="190" ry="130" fill="#E8641E"/>
     <ellipse cx="300" cy="580" rx="40" ry="22" fill="#C9520F"/><ellipse cx="520" cy="580" rx="40" ry="22" fill="#C9520F"/>
@@ -89,13 +117,13 @@
 
 <!-- BEAT 3 — slow blink -->
 <section class="beat b3">
-  <div class="super" style="--c:rgba(150,50,0,.12);width:1500px;left:-650px;bottom:-300px;transform:rotate(8deg)"></div>
+  <div class="super" style="--at:5.6s;--c:rgba(150,50,0,.12);width:1500px;left:-650px;bottom:-300px;transform:rotate(8deg)"></div>
   <div class="safe-916">
-    <div class="row"><span class="idx num pop" data-text style="--d:5.9s;color:var(--forest)">2</span>
-      <span class="mid rise" data-text style="--d:6.05s;color:var(--cream-ink)">מצמוץ איטי</span></div>
+    <div class="row"><span class="idx num slam" data-text style="--d:5.9s;color:var(--forest)">2</span>
+      <span class="mid rise" data-text style="--d:6.05s;color:var(--cream-ink)">מצמוץ <span class="swoosh draw" style="--d:6.5s">איטי</span></span></div>
     <div class="small rise" data-text style="--d:6.4s;color:var(--cream-ink);margin-top:20px">אומר: ״אני סומך עליך.״ מצמצו לו בחזרה.</div>
   </div>
-  <svg class="art" data-art viewBox="0 0 820 620" aria-hidden="true">
+  <svg class="art bob" data-art viewBox="0 0 820 620" aria-hidden="true">
     <g><ellipse cx="260" cy="330" rx="150" ry="120" fill="#FFC83D"/><ellipse cx="260" cy="330" rx="34" ry="105" fill="#16261C"/><circle cx="225" cy="280" r="18" fill="#fff"/>
        <ellipse class="lid slow" style="--bt:6.7s" cx="260" cy="330" rx="156" ry="126" fill="#C9520F"/></g>
     <g><ellipse cx="560" cy="330" rx="150" ry="120" fill="#FFC83D"/><ellipse cx="560" cy="330" rx="34" ry="105" fill="#16261C"/><circle cx="525" cy="280" r="18" fill="#fff"/>
@@ -105,13 +133,13 @@
 
 <!-- BEAT 4 — rubbing against legs -->
 <section class="beat b4">
-  <div class="super" style="--c:rgba(232,100,30,.12);width:1500px;right:-650px;top:-200px;transform:rotate(-8deg)"></div>
+  <div class="super" style="--at:8.4s;--c:rgba(232,100,30,.12);width:1500px;right:-650px;top:-200px;transform:rotate(-8deg)"></div>
   <div class="safe-916">
-    <div class="row"><span class="idx num pop" data-text style="--d:8.7s;color:var(--tang)">3</span>
-      <span class="mid rise" data-text style="--d:8.85s;color:var(--forest)">מתחכך ברגליים</span></div>
+    <div class="row"><span class="idx num slam" data-text style="--d:8.7s;color:var(--tang)">3</span>
+      <span class="mid rise" data-text style="--d:8.85s;color:var(--forest)">מתחכך <span class="swoosh draw" style="--d:9.3s">ברגליים</span></span></div>
     <div class="small rise" data-text style="--d:9.2s;color:var(--ink);margin-top:20px">אומר: ״אתה שלי.״ ריח זה חתימה.</div>
   </div>
-  <svg class="art" data-art viewBox="0 0 820 620" aria-hidden="true">
+  <svg class="art bob" data-art viewBox="0 0 820 620" aria-hidden="true">
     <ellipse cx="420" cy="600" rx="300" ry="18" fill="rgba(0,0,0,.18)"/>
     <rect x="520" y="0" width="90" height="590" rx="30" fill="#0A4D2C"/><rect x="640" y="0" width="90" height="590" rx="30" fill="#0A4D2C"/>
     <rect x="505" y="560" width="120" height="40" rx="18" fill="#16261C"/><rect x="625" y="560" width="120" height="40" rx="18" fill="#16261C"/>
@@ -129,10 +157,11 @@
 <!-- BEAT 5 — sign-off -->
 <section class="beat b5">
   <div class="safe-916" style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:30px">
-    <div class="mid rise" data-text style="--d:11.5s;color:var(--forest);font-size:96px">אצלכם בבית יש חתול פטפטן?</div>
+    <div class="mid rise" data-text style="--d:11.5s;color:var(--forest);font-size:96px">אצלכם בבית יש חתול <span class="swoosh draw" style="--d:12s">פטפטן?</span></div>
     <div class="hand rise" data-text style="--d:11.85s;color:var(--tang);font-size:100px">ספרו לנו בתגובות</div>
     <img class="logo-full pop" data-art src="../../brand/logo.png" alt="אקונה מטטה" style="--d:12.1s;width:520px;margin-top:30px">
-    <div class="rise" data-text style="--d:12.4s;font:500 44px/1.3 var(--body);color:var(--ink)">ויצמן 24, נתניה · <span class="phone">052-5284448</span></div>
+    <div class="cta pulse" data-text style="--d:12.5s"><svg viewBox="0 0 32 32"><path fill="#fff" d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.6c-2 0-4-.6-5.7-1.6l-.4-.2-3.9 1 1-3.8-.3-.4A10.6 10.6 0 1 1 16 26.6zm5.8-7.9c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.2-.7.1a8.7 8.7 0 0 1-4.3-3.8c-.3-.6.3-.5 1-1.6.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.2 3.4 1.4 3.6c.2.2 2.4 3.7 5.9 5.2 2.2.9 3 1 4.1.8.7-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.4z"/></svg>הזמנה בוואטסאפ</div>
+    <div class="rise" data-text style="--d:12.8s;font:500 44px/1.35 var(--body);color:var(--ink)">a-matata.co.il · ויצמן 24, נתניה</div>
   </div>
 </section>
 </div></body></html>

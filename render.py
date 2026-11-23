@@ -9,6 +9,8 @@ What it does beyond a screenshot:
   * waits for every web font and FAILS if a brand font fell back (no silent Arial)
   * shrinks any element with class "fit" until its text fits its box
   * warns about elements that overflow the canvas or the .safe-916 zone
+  * video: adds an original synthesized soundtrack (tools/soundtrack.py) with sound effects
+    synced to the animations (--mood bright|bouncy|chill|none, --seed to vary the melody)
   * video: pauses all CSS/Web animations and steps them frame by frame,
     so motion is smooth regardless of machine speed; adds a silent AAC track
     (some apps reject video with no audio stream); writes a cover .jpg and a
@@ -107,19 +109,30 @@ def render_png(html, out, w, h):
         b.close()
     print("OK", out)
 
-def render_mp4(html, out, w, h, dur, fps, cover_at):
+def render_mp4(html, out, w, h, dur, fps, cover_at, mood="bright", seed=7):
     tmp = tempfile.mkdtemp(prefix="frames_")
     n = int(round(dur * fps))
     with sync_playwright() as p:
         b, pg = open_page(p, html, w, h)
+        # sound cues from the animations themselves: scene wipe -> whoosh, pop/slap -> pop, rise -> tick
+        cues = pg.evaluate("""() => document.getAnimations().map(a => {
+            const k = {wipe:'whoosh', pop:'pop', slap:'pop', slam:'pop', rise:'tick', draw:'tick'}[a.animationName];
+            return k ? {t: (a.effect.getTiming().delay || 0) / 1000, k} : null }).filter(Boolean)""")
         pg.evaluate("() => document.getAnimations().forEach(a => a.pause())")
         for i in range(n):
             t = i * 1000.0 / fps
             pg.evaluate("t => document.getAnimations().forEach(a => a.currentTime = t)", t)
             pg.screenshot(path=f"{tmp}/{i:05d}.jpg", type="jpeg", quality=93)
         b.close()
+    audio = ["-f", "lavfi", "-i", "anullsrc=channel_layout=stereo:sample_rate=44100"]
+    if mood != "none":
+        wav = f"{tmp}/sound.wav"
+        here = os.path.dirname(os.path.abspath(__file__))
+        subprocess.run([sys.executable, os.path.join(here, "tools", "soundtrack.py"), wav, "--dur", str(dur),
+                        "--mood", mood, "--seed", str(seed), "--cues", json.dumps(cues)], check=True)
+        audio = ["-i", wav]
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-framerate", str(fps), "-i", f"{tmp}/%05d.jpg",
-                    "-f", "lavfi", "-i", "anullsrc=channel_layout=stereo:sample_rate=44100",
+                    *audio,
                     "-shortest", "-c:v", "libx264", "-preset", "veryfast", "-crf", "18", "-pix_fmt", "yuv420p",
                     "-r", str(fps), "-c:a", "aac", "-b:a", "128k", "-movflags", "+faststart", out], check=True)
     base = os.path.splitext(out)[0]
@@ -140,8 +153,10 @@ if __name__ == "__main__":
     ap.add_argument("--w", type=int, default=1080); ap.add_argument("--h", type=int, default=1350)
     ap.add_argument("--dur", type=float, default=9); ap.add_argument("--fps", type=int, default=30)
     ap.add_argument("--cover", type=float, default=1.5, help="second used for the video cover image")
+    ap.add_argument("--mood", default="bright", help="soundtrack: bright | bouncy | chill | none")
+    ap.add_argument("--seed", type=int, default=7, help="soundtrack melody variation; change it every reel")
     a = ap.parse_args()
     if a.out.lower().endswith(".mp4"):
-        render_mp4(a.html, a.out, a.w, a.h, a.dur, a.fps, a.cover)
+        render_mp4(a.html, a.out, a.w, a.h, a.dur, a.fps, a.cover, a.mood, a.seed)
     else:
         render_png(a.html, a.out, a.w, a.h)
