@@ -162,6 +162,7 @@ Metricool צריך קישור ציבורי לתמונה או לסרטון. סב�
 ```
 - **ריל / סרטון:** שולחים גם ליוטיוב כ-Short: מוסיפים `{"network":"youtube"}` ו-`youtubeData: {"title":"<כותרת עד 90 תווים> | אקונה מטטה נתניה","type":"short","privacy":"public","madeForKids":false,"category":"PETS_ANIMALS","isAiGeneratedContent":false,"tags":[...]}`. `media` = קישור ה-mp4, `videoThumbnailUrl` = קישור ה-`_cover.jpg`, `instagramData: {"type":"REEL","showReelOnFeed":true,"isAiGenerated":true}`, `facebookData: {"type":"REEL"}`, `tiktokData: {..., "isAigc":true, "commercialContentOwnBrand":true}`. אפשר לנסות פעם אחת להוסיף מוזיקה לאינסטגרם עם `audioConfiguration: {"audioId":"<שם שיר אינסטרומנטלי קליל>","audioVolume":60}`. אם הבקשה נדחית, מסירים את השדה ומתזמנים בלי.
 - **תמונות תמיד כ-JPG:** טיקטוק דוחה PNG ("image/png is not allowed"). מרנדרים ישירות ל-`post.jpg` (`render.py ... post.jpg`), או ממירים לפני הפרסום, ושולחים לכל הרשתות את ה-JPG.
+- אחרי שעת הפרסום בודקים עם `getScheduledPosts` שכל רשת בסטטוס PUBLISHED. רשת ב-ERROR מתקנים לפי הודעת השגיאה ומעלים לה שוב בנפרד.
 - `createScheduledPost` עם `blogId: "8312184"` ו-`date` בפורמט ISO עם `+02:00` בחורף או `+03:00` בקיץ.
 - שומרים את `plannerUrl` שחוזר, ומוסרים למשתמש את הקישור הזה, קישור לתמונה, והכיתוב.
 
