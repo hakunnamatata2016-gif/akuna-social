@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../../brand/brand.css">
+<style>
+/* TEMPLATE: product — the real product photo, staged like a shop-window display.
+   Catalog photos have white backgrounds: mix-blend-mode:multiply drops the white onto the sun disc,
+   so the product looks cut out without any AI background removal.
+   Price comes ONLY from the product page, checked today. */
+.canvas{background:var(--paper)}
+.disc{position:absolute;width:820px;height:820px;border-radius:50%;background:var(--sun);left:-150px;top:330px}
+.disc::after{content:"";position:absolute;inset:40px;border-radius:50%;border:4px dashed rgba(22,38,28,.18)}
+.shot{position:absolute;left:20px;top:390px;width:560px;height:680px;object-fit:contain;mix-blend-mode:multiply;
+  filter:contrast(1.04) saturate(1.06)}
+.floor{position:absolute;left:90px;top:1050px;width:480px;height:34px;border-radius:50%;background:rgba(0,0,0,.16);filter:blur(6px)}
+.kicker{position:absolute;top:86px;right:84px;font:700 34px/1 var(--body);color:var(--leaf);display:flex;align-items:center;gap:14px}
+.kicker i{display:block;width:46px;height:4px;background:var(--leaf);border-radius:4px}
+h1{position:absolute;top:146px;right:80px;width:900px;font:700 112px/1 var(--display);color:var(--forest);text-wrap:balance}
+h1 em{font-style:normal;color:var(--tang)}
+.what{position:absolute;top:400px;right:84px;width:470px;font:500 36px/1.35 var(--body);color:var(--ink)}
+.what b{display:block;font-weight:700;color:var(--forest)}
+/* shelf tag with a punched hole and string */
+.tag{position:absolute;right:80px;top:690px;width:360px;padding:34px 36px 30px;background:var(--forest);color:var(--cream-ink);
+  border-radius:22px 22px 22px 90px;transform:rotate(4deg);box-shadow:0 24px 40px -18px rgba(0,0,0,.45)}
+.tag::before{content:"";position:absolute;top:28px;left:34px;width:30px;height:30px;border-radius:50%;background:var(--paper)}
+.tag small{display:block;font:500 30px/1 var(--body);opacity:.85}
+.tag .price{display:block;font:700 170px/.9 var(--poster);margin-top:10px}
+.tag .price span{font-size:.5em;margin-inline-start:8px}
+.joke{position:absolute;right:96px;top:1000px;width:420px;font:700 84px/.95 var(--hand);color:var(--tang);transform:rotate(-3deg)}
+
+/* trial override: packshot on a white plate over a forest field — keeps the real pack colours true */
+.canvas{background:var(--forest)}
+.disc{background:#fff;box-shadow:0 40px 80px -30px rgba(0,0,0,.55);width:700px;height:700px;left:-150px;top:420px}
+.disc::after{display:none}
+.shot{mix-blend-mode:normal;left:-70px;top:480px;width:580px;height:580px;object-fit:contain;clip-path:circle(348px at 270px 290px)}
+.floor{display:none}
+.kicker{color:var(--sun)}.kicker i{background:var(--sun)}
+h1{color:var(--cream-ink)} h1 em{color:var(--sun)}
+.what{color:var(--cream-ink)} .what b{color:var(--sun)}
+.tag{background:var(--sun);color:var(--forest)} .tag::before{background:var(--forest)}
+.joke{color:var(--cream-ink)}
+</style></head>
+<body><div class="canvas grain">
+  <div class="disc" data-art data-overlap-ok></div>
+  <div class="floor"></div>
+  <img class="shot" data-art src="../../media-in/85a4dc613128.jpg" alt="">
+
+  <div class="kicker"><i></i>מוצר השבוע · כלבים</div>
+  <h1>הכלב לא קורא רכיבים. <em>אתם כן.</em></h1>
+  <div class="what"><b>מונג׳ סלמון ואורז</b>סלמון במקום הראשון ברשימה.<br>חלבון אחד, בלי הפתעות לבטן.<br>שק של <span style="white-space:nowrap"><span class="num">12</span> ק״ג</span></div>
+  <div class="tag"><small>מחיר באתר היום</small><span class="price"><span>₪</span>299</span></div>
+  <div class="joke">הוא יגיד תודה. בעיניים.</div>
+  <div class="super" data-art data-overlap-ok style="--c:rgba(255,255,255,.06);width:1100px;right:-520px;top:-260px;transform:rotate(14deg)"></div>
+
+  <div class="strip">
+    <img class="lockup" src="../../brand/lockup-h.png" alt="אקונה מטטה">
+    <div class="where"><b>ויצמן 24, נתניה</b><br><span class="phone">052-5284448</span> · a-matata.co.il</div>
+  </div>
+</div></body></html>
