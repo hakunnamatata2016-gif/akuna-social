@@ -1,0 +1,34 @@
+# Copies product photos from the store's own CDN into this repo, so Claude's cloud
+# workspace (which can reach GitHub but not the CDN) can use them in designs.
+# Trigger: Claude commits fetch/requests.txt with one image URL per line.
+name: mirror product images
+on:
+  push:
+    paths: ["fetch/requests.txt"]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: download (store CDN and site only)
+        run: |
+          mkdir -p media-in
+          while read -r url; do
+            [ -z "$url" ] && continue
+            case "$url" in
+              https://d3m9l0v76dty0.cloudfront.net/*|https://www.a-matata.co.il/*) ;;
+              *) echo "skip (host not allowed): $url"; continue ;;
+            esac
+            name=$(printf '%s' "$url" | sha1sum | cut -c1-12)
+            ext="${url##*.}"; ext="${ext%%\?*}"; case "$ext" in png|jpg|jpeg|webp) ;; *) ext=png ;; esac
+            curl -fsSL --max-filesize 15000000 "$url" -o "media-in/$name.$ext" && echo "ok $name.$ext <- $url"
+          done < fetch/requests.txt
+      - name: commit
+        run: |
+          git config user.name "akuna-bot"; git config user.email "bot@users.noreply.github.com"
+          git add media-in
+          git diff --cached --quiet || git commit -m "mirror product images"
+          git push

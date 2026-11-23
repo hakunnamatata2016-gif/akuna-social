@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../brand/brand.css">
+<style>
+/* TEMPLATE: deal — the offer as a shelf talker. One number does the shouting.
+   Tangerine field, two stamped kraft bags, a sun-yellow sticker on the second one. */
+.canvas{background:var(--tang)}
+.rays{position:absolute;inset:-300px -300px 150px -300px;opacity:.09;
+  background:repeating-conic-gradient(from 0deg at 50% 78%,#fff 0 6deg,transparent 6deg 18deg)}
+.kicker{position:absolute;top:86px;right:84px;font:700 34px/1 var(--body);color:var(--forest);display:flex;align-items:center;gap:14px}
+.kicker i{display:block;width:46px;height:4px;background:var(--forest);border-radius:4px}
+h1{position:absolute;top:140px;right:80px;width:600px;font:700 150px/.94 var(--display);color:var(--cream-ink)}
+h1 em{font-style:normal;color:var(--forest)}
+.terms{position:absolute;top:625px;right:86px;width:480px;font:500 36px/1.38 var(--body);color:var(--forest)}
+.terms b{font-weight:700}
+.joke{position:absolute;top:835px;right:96px;width:460px;font:700 104px/.95 var(--hand);color:var(--cream-ink);transform:rotate(-4deg)}
+.art{position:absolute;left:10px;bottom:150px;width:500px;height:580px}
+.sticker{width:290px;height:290px;left:40px;top:470px;font:700 50px/1 var(--display);z-index:5}
+.sticker .n{font:700 150px/.8 var(--poster);display:block;margin-top:10px}
+</style></head>
+<body><div class="canvas grain">
+  <div class="super" style="--c:rgba(150,50,0,.11);width:1650px;left:-760px;top:-120px;transform:rotate(-10deg)"></div>
+  <div class="kicker"><i></i>מבצע לסופ״ש</div>
+  <h1>השק<br><em>השני</em><br>בהנחה.</h1>
+  <div class="terms"><b>שק שני של מזון יבש מאותו מוצר ב־<span class="num">10%</span> הנחה.</b><br>לא כולל מזון רפואי.</div>
+  <div class="joke">הכלב לא סופר.<br>אתם כן.</div>
+
+  <svg class="art" viewBox="0 0 620 720" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+    <defs>
+      <g id="bag">
+        <!-- body -->
+        <path d="M20 120 L230 120 L240 620 L10 620 Z" fill="#E9D2AE"/>
+        <!-- gusset shade -->
+        <path d="M230 120 L270 140 L280 600 L240 620 Z" fill="#C9A97B"/>
+        <!-- crimped top -->
+        <path d="M20 120 L20 70 L36 58 L52 70 L68 58 L84 70 L100 58 L116 70 L132 58 L148 70 L164 58 L180 70 L196 58 L212 70 L230 58 L230 120 Z" fill="#D8BC8F"/>
+        <path d="M230 58 L270 80 L270 140 L230 120 Z" fill="#B8976A"/>
+        <!-- label -->
+        <rect x="45" y="250" width="160" height="200" rx="14" fill="#FFF6E9"/>
+        <circle cx="125" cy="315" r="38" fill="#0E8A43"/>
+        <g fill="#FFF6E9"><ellipse cx="125" cy="326" rx="15" ry="12"/><circle cx="109" cy="308" r="6.5"/><circle cx="121" cy="300" r="6.5"/><circle cx="134" cy="301" r="6.5"/><circle cx="143" cy="311" r="6"/></g>
+        <rect x="72" y="375" width="106" height="14" rx="7" fill="#16261C" opacity=".8"/>
+        <rect x="88" y="403" width="74" height="10" rx="5" fill="#16261C" opacity=".35"/>
+        <!-- floor shadow -->
+        <ellipse cx="150" cy="628" rx="150" ry="16" fill="rgba(0,0,0,.22)"/>
+      </g>
+    </defs>
+    <use href="#bag" x="300" y="40"/>
+    <g transform="translate(40 110) rotate(-7 150 600)"><use href="#bag"/></g>
+  </svg>
+  <div class="sticker"><div><span class="n num">10%</span>הנחה</div></div>
+
+  <div class="strip">
+    <img class="lockup" src="../brand/lockup-h.png" alt="אקונה מטטה">
+    <div class="where"><b>ויצמן 24, נתניה</b><br><span class="phone">052-5284448</span> · a-matata.co.il</div>
+  </div>
+</div></body></html>

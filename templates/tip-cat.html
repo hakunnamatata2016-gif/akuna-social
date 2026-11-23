@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../brand/brand.css">
+<style>
+/* TEMPLATE: tip — one funny observation as the hook, the tip itself lives in the caption.
+   Big field of forest green, one illustrated moment, receipt strip at the bottom. */
+.canvas{background:var(--forest)}
+.field{position:absolute;inset:0 0 150px 0;background:var(--forest)}
+.field.halftone{opacity:.55}
+.kicker{position:absolute;top:86px;right:84px;font:700 34px/1 var(--body);color:var(--sun);
+  display:flex;align-items:center;gap:14px}
+.kicker i{display:block;width:46px;height:4px;background:var(--sun);border-radius:4px}
+h1{position:absolute;top:150px;right:80px;left:80px;font:700 150px/.98 var(--display);color:var(--cream-ink);
+  letter-spacing:-1px;text-wrap:balance}
+h1 em{font-style:normal;color:var(--sun)}
+.note{position:absolute;top:500px;right:96px;font:700 112px/1 var(--hand);color:var(--sun);transform:rotate(-4deg)}
+.art{position:absolute;left:0;bottom:150px;width:1080px;height:660px}
+</style></head>
+<body><div class="canvas grain">
+  <div class="field"></div>
+  <div class="super" style="--c:rgba(255,255,255,.055);width:1500px;left:-700px;top:-330px;transform:rotate(12deg)"></div>
+
+  <div class="kicker"><i></i>טיפ של יום רביעי · חתולים</div>
+  <h1 class="fit" style="height:330px">שוב הפיל לך <em>כוס</em> מהשולחן?</h1>
+  <div class="note">זה לא אישי. זה ציד.</div>
+
+  <svg class="art" viewBox="0 0 1080 640" aria-hidden="true">
+    <defs>
+      <pattern id="tabby" width="46" height="46" patternUnits="userSpaceOnUse" patternTransform="rotate(-20)">
+        <rect width="46" height="46" fill="#EC6519"/><rect width="13" height="46" fill="#C94D0C"/>
+      </pattern>
+    </defs>
+    <!-- table top + front edge -->
+    <path d="M-20 420 H690 L708 452 H-20 Z" fill="#E9D2AE"/>
+    <rect x="-20" y="452" width="728" height="40" fill="#C9A97B"/>
+    <rect x="-20" y="492" width="728" height="16" fill="rgba(0,0,0,.18)"/>
+    <!-- the paw, coming in from the left like it owns the place -->
+    <g>
+      <path d="M-40 330 C 120 318, 300 330, 430 360 L 430 430 C 300 420, 120 420, -40 432 Z" fill="url(#tabby)"/>
+      <ellipse cx="470" cy="392" rx="74" ry="56" fill="#EC6519"/>
+      <ellipse cx="470" cy="392" rx="74" ry="56" fill="none" stroke="#C94D0C" stroke-width="5"/>
+      <g fill="#EC6519" stroke="#C94D0C" stroke-width="5">
+        <ellipse cx="540" cy="350" rx="24" ry="20"/>
+        <ellipse cx="553" cy="392" rx="23" ry="20"/>
+        <ellipse cx="540" cy="434" rx="24" ry="20"/>
+      </g>
+      <path d="M560 343 l18 -8 M574 389 l20 -3 M560 434 l18 8" stroke="#FFF6E9" stroke-width="5" stroke-linecap="round"/>
+    </g>
+    <!-- motion arcs -->
+    <g fill="none" stroke="#FFF6E9" stroke-width="7" stroke-linecap="round" opacity=".85">
+      <path d="M640 300 C 700 270, 760 280, 800 320"/>
+      <path d="M660 250 C 730 210, 810 225, 855 280"/>
+    </g>
+    <!-- the mug, mid-fall -->
+    <g transform="translate(860 360) rotate(38)">
+      <rect x="-70" y="-85" width="140" height="170" rx="22" fill="#FFF6E9"/>
+      <rect x="-70" y="-30" width="140" height="36" fill="#18A7DA"/>
+      <path d="M70 -40 C 125 -40, 125 50, 70 50" fill="none" stroke="#FFF6E9" stroke-width="22"/>
+      <ellipse cx="0" cy="-85" rx="70" ry="16" fill="#6B3E1F"/>
+    </g>
+    <!-- coffee leaving the mug -->
+    <g fill="#8A5129">
+      <circle cx="845" cy="250" r="16"/><circle cx="880" cy="215" r="11"/><circle cx="812" cy="222" r="9"/><circle cx="905" cy="258" r="7"/>
+    </g>
+    <!-- shadow on the floor where it's about to land -->
+    <ellipse cx="900" cy="610" rx="120" ry="18" fill="rgba(0,0,0,.25)"/>
+  </svg>
+
+  <div class="strip">
+    <img class="lockup" src="../brand/lockup-h.png" alt="אקונה מטטה">
+    <div class="where"><b>ויצמן 24, נתניה</b><br><span class="phone">052-5284448</span> · a-matata.co.il</div>
+  </div>
+</div></body></html>
