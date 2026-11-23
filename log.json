@@ -1,1 +1,22 @@
-[]
+[
+ {
+  "date": "2026-11-23",
+  "pillar": "product",
+  "animal": "dog",
+  "template": "product",
+  "bg": "forest",
+  "hook": "הכלב לא קורא רכיבים. אתם כן.",
+  "product_url": "https://www.a-matata.co.il/items/9024314",
+  "planner_url": "https://app.metricool.com/planner/calendar?blogId=8312184&openWithPostUuid=5831417422196984528"
+ },
+ {
+  "date": "2026-11-23",
+  "pillar": "tip-reel",
+  "animal": "cat",
+  "template": "reel",
+  "bg": "forest/sky/tang/sun",
+  "hook": "החתול שלך מדבר איתך.",
+  "product_url": "",
+  "planner_url": ""
+ }
+]
