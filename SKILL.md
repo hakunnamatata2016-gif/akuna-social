@@ -122,7 +122,7 @@ description: Creates, designs and schedules social posts, carousels, reels and v
 
 ### 6. רינדור ובדיקה עצמית (לפחות 2 סבבים)
 ```bash
-python3 render.py posts/<x>/post.html posts/<x>/post.png                 # פוסט 1080×1350
+python3 render.py posts/<x>/post.html posts/<x>/post.jpg                 # פוסט 1080×1350 (JPG, כי טיקטוק לא מקבל PNG)
 python3 render.py posts/<x>/reel.html posts/<x>/reel.mp4 --h 1920 --dur 10   # ריל
 ```
 הסקריפט עוצר אם פונט לא נטען, ומדפיס `WARN` על טקסט שחורג מהקנבס, טקסט חתוך, בלוקים שמתנגשים, או טקסט מחוץ לאזור הבטוח. **כל WARN מתוקן**, אלא אם החפיפה מכוונת (ואז מסמנים `data-overlap-ok`). לסרטון נוצרים גם `_cover.jpg` וגם `_sheet.png` (8 פריימים בתמונה אחת).
@@ -161,6 +161,7 @@ Metricool צריך קישור ציבורי לתמונה או לסרטון. סב�
  "tiktokData":{"privacyOption":"PUBLIC_TO_EVERYONE","title":"<פתיחה קצרה>","autoAddMusic":true,"photoCoverIndex":0,"commercialContentOwnBrand":true}}
 ```
 - **ריל / סרטון:** שולחים גם ליוטיוב כ-Short: מוסיפים `{"network":"youtube"}` ו-`youtubeData: {"title":"<כותרת עד 90 תווים> | אקונה מטטה נתניה","type":"short","privacy":"public","madeForKids":false,"category":"PETS_ANIMALS","isAiGeneratedContent":false,"tags":[...]}`. `media` = קישור ה-mp4, `videoThumbnailUrl` = קישור ה-`_cover.jpg`, `instagramData: {"type":"REEL","showReelOnFeed":true,"isAiGenerated":true}`, `facebookData: {"type":"REEL"}`, `tiktokData: {..., "isAigc":true, "commercialContentOwnBrand":true}`. אפשר לנסות פעם אחת להוסיף מוזיקה לאינסטגרם עם `audioConfiguration: {"audioId":"<שם שיר אינסטרומנטלי קליל>","audioVolume":60}`. אם הבקשה נדחית, מסירים את השדה ומתזמנים בלי.
+- **תמונות תמיד כ-JPG:** טיקטוק דוחה PNG ("image/png is not allowed"). מרנדרים ישירות ל-`post.jpg` (`render.py ... post.jpg`), או ממירים לפני הפרסום, ושולחים לכל הרשתות את ה-JPG.
 - `createScheduledPost` עם `blogId: "8312184"` ו-`date` בפורמט ISO עם `+02:00` בחורף או `+03:00` בקיץ.
 - שומרים את `plannerUrl` שחוזר, ומוסרים למשתמש את הקישור הזה, קישור לתמונה, והכיתוב.
 
